@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import './styles.css';
@@ -27,7 +27,7 @@ const CreatePost = ({ onPostCreated }) => {
             console.log('Title and body are required');
         } else {
             const newPost = {
-                id: uuid.v4(),
+                id: uuid.v4,
                 title: title,
                 body: body,
                 date: moment().toISOString()
@@ -40,7 +40,7 @@ const CreatePost = ({ onPostCreated }) => {
                     }
                 };
 
-                // Create the post
+                //Create the post
                 const body = JSON.stringify(newPost);
                 const res = await axios.post(
                     'http://localhost:5000/api/posts',
@@ -48,7 +48,7 @@ const CreatePost = ({ onPostCreated }) => {
                     config
                 );
 
-                // Call the handler and redirect
+                //Call the handler and redirect
                 onPostCreated(res.data);
                 history.push('/');
             } catch (error) {
